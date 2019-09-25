@@ -1,3 +1,5 @@
+package Principal_datos;
+
 
 public class Domicilio {
     private String domicilio;

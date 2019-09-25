@@ -1,3 +1,5 @@
+package Principal_datos;
+
 
 public class Cliente extends Persona{
     private int saldo;
