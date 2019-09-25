@@ -4,6 +4,7 @@ public class main {
     /**
      * @param args the command line arguments
      */
+	 ArrayList lista = new ArrayList();
     public static void main(String[] args) {
         
         int opcion;
