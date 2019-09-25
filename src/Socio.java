@@ -36,9 +36,9 @@ public class Socio extends Persona{
         añoDesde = Leer.datoInt();
     }
     
-    public void setCampoFecha ( int añoDesde)
+    public void setCampoFecha ( GregorianCalendar obj)
     {
-        fecha = fecha.get(Calendar.FEBRUARY);
+        fecha = obj;
     }
 
     public Domicilio getViveEn() {
