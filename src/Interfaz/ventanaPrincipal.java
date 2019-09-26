@@ -7,7 +7,6 @@ package Interfaz;
 
 import java.awt.Container;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Locale;
 
 /**
@@ -16,12 +15,16 @@ import java.util.Locale;
  */
 public class ventanaPrincipal extends javax.swing.JFrame {
     
-    GregorianCalendar fecha = new GregorianCalendar(1994, 8, 26);
-
+    Calendar fecha = Calendar.getInstance();
+    int dayOfMonth = fecha.get(Calendar.DAY_OF_MONTH);
+    int month = fecha.get(Calendar.MONTH);
+    int year = fecha.get(Calendar.YEAR);
+    
     public ventanaPrincipal() {
        
         initComponents();
          jMenuItem1.setEnabled(false);  
+         jLabel1.setText(""+dayOfMonth+"/"+(month+1)+"/"+year);
     }
     
     @SuppressWarnings("unchecked")
@@ -32,6 +35,7 @@ public class ventanaPrincipal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -43,9 +47,13 @@ public class ventanaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 102, 102));
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        setForeground(java.awt.Color.orange);
+        setFocusCycleRoot(false);
 
         panelBienvenida1.setBackground(new java.awt.Color(0, 102, 102));
+        panelBienvenida1.setBorder(new javax.swing.border.MatteBorder(null));
+        panelBienvenida1.setAutoscrolls(true);
+        panelBienvenida1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        panelBienvenida1.setDoubleBuffered(false);
 
         jLabel2.setText("Jorge Herrera Molina");
 
@@ -54,6 +62,15 @@ public class ventanaPrincipal extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Programa de gestión con diseño grafico");
+        jLabel4.setAutoscrolls(true);
+        jLabel4.setFocusCycleRoot(true);
+        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel4.setNextFocusableComponent(jMenuItem1);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 28)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("jLabel1");
+        jLabel1.setAutoscrolls(true);
 
         javax.swing.GroupLayout panelBienvenida1Layout = new javax.swing.GroupLayout(panelBienvenida1);
         panelBienvenida1.setLayout(panelBienvenida1Layout);
@@ -62,30 +79,38 @@ public class ventanaPrincipal extends javax.swing.JFrame {
             .addGroup(panelBienvenida1Layout.createSequentialGroup()
                 .addGroup(panelBienvenida1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBienvenida1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE))
+                    .addGroup(panelBienvenida1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(panelBienvenida1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel3)))
-                    .addGroup(panelBienvenida1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel4)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                            .addComponent(jLabel3))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(panelBienvenida1Layout.createSequentialGroup()
+                .addGap(246, 246, 246)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelBienvenida1Layout.setVerticalGroup(
             panelBienvenida1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBienvenida1Layout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
+                .addGap(70, 70, 70)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(122, 122, 122)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addGap(5, 5, 5))
         );
 
-        jMenuBar2.setBackground(new java.awt.Color(102, 0, 0));
+        jMenuBar2.setBackground(new java.awt.Color(204, 204, 204));
         jMenuBar2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        jMenu2.setBackground(new java.awt.Color(255, 255, 0));
         jMenu2.setText("Menu");
 
         jMenuItem1.setText("Bienvenida");
@@ -126,7 +151,7 @@ public class ventanaPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBienvenida1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelBienvenida1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -186,6 +211,7 @@ public class ventanaPrincipal extends javax.swing.JFrame {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
