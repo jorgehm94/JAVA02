@@ -1,5 +1,7 @@
 package Principal_datos;
 
+import Interfaz.ventanaPrincipal;
+
 
 public class main {
 
@@ -9,7 +11,11 @@ public class main {
     
     public static void main(String[] args) {
 
-        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ventanaPrincipal().setVisible(true);
+            }
+        });
 
     }
     
