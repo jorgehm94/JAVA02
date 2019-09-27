@@ -5,9 +5,17 @@
  */
 package Interfaz;
 
+
+// Paquetes importados para la lista principal
+
+import Principal_datos.Lista;
+import Principal_datos.Persona;
+
 import java.awt.Container;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Locale;
+import javax.swing.JPanel;
 
 /**
  *
@@ -15,16 +23,19 @@ import java.util.Locale;
  */
 public class ventanaPrincipal extends javax.swing.JFrame {
     
-    Calendar fecha = Calendar.getInstance();
-    int dayOfMonth = fecha.get(Calendar.DAY_OF_MONTH);
-    int month = fecha.get(Calendar.MONTH);
-    int year = fecha.get(Calendar.YEAR);
+    Calendar fecha = new GregorianCalendar();
+    
+    int dia = fecha.get(Calendar.DAY_OF_MONTH);
+    int mes = fecha.get(Calendar.MONTH);
+    int año = fecha.get(Calendar.YEAR);
+    
+    protected static Lista<Persona> listemp = new Lista<Persona>();
     
     public ventanaPrincipal() {
        
         initComponents();
          jMenuItem1.setEnabled(false);  
-         jLabel1.setText(""+dayOfMonth+"/"+(month+1)+"/"+year);
+         jLabel1.setText(""+dia+"/"+(mes+1)+"/"+año);
     }
     
     @SuppressWarnings("unchecked")
@@ -46,7 +57,7 @@ public class ventanaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 102, 102));
-        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFocusCycleRoot(false);
 
         panelBienvenida1.setBackground(new java.awt.Color(0, 102, 102));
@@ -65,7 +76,6 @@ public class ventanaPrincipal extends javax.swing.JFrame {
         jLabel4.setAutoscrolls(true);
         jLabel4.setFocusCycleRoot(true);
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel4.setNextFocusableComponent(jMenuItem1);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 28)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -80,7 +90,7 @@ public class ventanaPrincipal extends javax.swing.JFrame {
                 .addGroup(panelBienvenida1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBienvenida1Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE))
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 827, Short.MAX_VALUE))
                     .addGroup(panelBienvenida1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(panelBienvenida1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,17 +99,17 @@ public class ventanaPrincipal extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(panelBienvenida1Layout.createSequentialGroup()
-                .addGap(246, 246, 246)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(163, 163, 163)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelBienvenida1Layout.setVerticalGroup(
             panelBienvenida1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBienvenida1Layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(76, 76, 76)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                 .addGap(122, 122, 122)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -108,7 +118,7 @@ public class ventanaPrincipal extends javax.swing.JFrame {
         );
 
         jMenuBar2.setBackground(new java.awt.Color(204, 204, 204));
-        jMenuBar2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jMenuBar2.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         jMenu2.setBackground(new java.awt.Color(255, 255, 0));
         jMenu2.setText("Menu");
@@ -180,17 +190,32 @@ public class ventanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-       // Desactivar el boton de VisualizarDatos
-        jMenuItem4.setEnabled(false);
-         
-         // Activar el boton de Dar de alta
-         jMenuItem3.setEnabled(true);  
-         
-         // Activar el boton de Bienvenida
-         jMenuItem1.setEnabled(true); 
-         
-        this.setContentPane(new panelVisualizar());
-        this.pack();
+       
+
+         if(listemp.tamanio()==0){
+             Error e = new Error();
+             
+             e.setVisible(true);
+             
+             jMenuItem4.setEnabled(false);
+             
+         }
+         else
+         {
+
+
+            // Desactivar el boton de VisualizarDatos
+            jMenuItem4.setEnabled(false);
+
+             // Activar el boton de Dar de alta
+             jMenuItem3.setEnabled(true);  
+
+             // Activar el boton de Bienvenida
+             jMenuItem1.setEnabled(true); 
+
+            this.setContentPane(new panelVisualizar());
+            this.pack();
+        }
         
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
@@ -207,8 +232,7 @@ public class ventanaPrincipal extends javax.swing.JFrame {
         this.pack();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    
-    
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

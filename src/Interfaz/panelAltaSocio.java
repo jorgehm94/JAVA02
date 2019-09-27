@@ -5,6 +5,8 @@
  */
 package Interfaz;
 
+import Principal_datos.main;
+
 /**
  *
  * @author alumno
@@ -16,6 +18,9 @@ public class panelAltaSocio extends javax.swing.JPanel {
      */
     public panelAltaSocio() {
         initComponents();
+        
+        //Poner los campos de textos vacios para mejor visualizacion.
+        jTextField1.setText("");
     }
 
     /**
@@ -187,7 +192,9 @@ public class panelAltaSocio extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+       panelAlta p = new panelAlta();
+        
+        Principal_datos.main.cambiarPanel(p);
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
