@@ -33,6 +33,8 @@ public class panelAltaCliente extends javax.swing.JPanel {
         jTextField4.setText("");
         jTextField5.setText("");
         jTextField6.setText("");
+        jTextField7.setText("");
+        jTextField8.setText("");
     }
     
 
@@ -60,6 +62,8 @@ public class panelAltaCliente extends javax.swing.JPanel {
         jTextField6 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jTextField7 = new javax.swing.JTextField();
+        jTextField8 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(0, 153, 153));
 
@@ -144,6 +148,10 @@ public class panelAltaCliente extends javax.swing.JPanel {
             }
         });
 
+        jTextField7.setText("jTextField7");
+
+        jTextField8.setText("jTextField8");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -166,8 +174,8 @@ public class panelAltaCliente extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(jButton1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton2)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -175,8 +183,13 @@ public class panelAltaCliente extends javax.swing.JPanel {
                             .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                             .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)))
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addGap(47, 47, 47))
         );
         layout.setVerticalGroup(
@@ -200,8 +213,10 @@ public class panelAltaCliente extends javax.swing.JPanel {
                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
+                            .addComponent(jTextField4)
+                            .addComponent(jLabel5)
+                            .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,7 +229,7 @@ public class panelAltaCliente extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGap(30, 30, 30))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -262,7 +277,9 @@ public class panelAltaCliente extends javax.swing.JPanel {
         String nombreCaptura = jTextField1.getText();
         String codigoCaptura  = jTextField2.getText();
         String deudaCaptura  = jTextField3.getText();
-        String fechaCaptura  = jTextField4.getText();
+        String diaCaptura  = jTextField4.getText();
+        String mesCaptura = jTextField7.getText();
+        String añoCaptura = jTextField8.getText();
         String direccionCaptura  = jTextField5.getText();
         String saldoCaptura  = jTextField6.getText();
         
@@ -273,9 +290,9 @@ public class panelAltaCliente extends javax.swing.JPanel {
         
         //La fecha que esta en formato String capturamos de forma dividida el dia, mes y año
         //El formato dd/mm/aaaa es muy importante cumplirlo
-        int dia = Integer.parseInt(fechaCaptura.substring(0, 2));
-        int mes = Integer.parseInt (fechaCaptura.substring(3,5));
-        int año = Integer.parseInt (fechaCaptura.substring(6, 10));
+        int dia = Integer.parseInt(diaCaptura);
+        int mes = Integer.parseInt(mesCaptura);
+        int año = Integer.parseInt(añoCaptura);
         
         //Creamos el objeto
         //public Cliente(int saldo, String direccion, int codigo, float deuda, String nombre, int dia, int mes, int año)
@@ -308,5 +325,7 @@ public class panelAltaCliente extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
     // End of variables declaration//GEN-END:variables
 }
