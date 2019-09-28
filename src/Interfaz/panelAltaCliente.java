@@ -16,6 +16,15 @@ public class panelAltaCliente extends javax.swing.JPanel {
      */
     public panelAltaCliente() {
         initComponents();
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
+        jTextField6.setText("");
+                
+        
+        
     }
 
     /**
@@ -61,13 +70,12 @@ public class panelAltaCliente extends javax.swing.JPanel {
         jLabel5.setText("FECHA");
 
         jLabel6.setFont(new java.awt.Font("URW Gothic L", 1, 12)); // NOI18N
-        jLabel6.setText("DOMICILIO");
+        jLabel6.setText("DIRECCION");
 
         jLabel7.setFont(new java.awt.Font("URW Gothic L", 1, 12)); // NOI18N
         jLabel7.setText("SALDO");
 
         jTextField1.setFont(new java.awt.Font("URW Gothic L", 0, 12)); // NOI18N
-        jTextField1.setText("jTextField1");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -75,7 +83,11 @@ public class panelAltaCliente extends javax.swing.JPanel {
         });
 
         jTextField2.setFont(new java.awt.Font("URW Gothic L", 0, 12)); // NOI18N
-        jTextField2.setText("jTextField2");
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
         jTextField3.setFont(new java.awt.Font("URW Gothic L", 0, 12)); // NOI18N
         jTextField3.setText("jTextField3");
@@ -87,12 +99,27 @@ public class panelAltaCliente extends javax.swing.JPanel {
 
         jTextField4.setFont(new java.awt.Font("URW Gothic L", 0, 12)); // NOI18N
         jTextField4.setText("jTextField4");
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
 
         jTextField5.setFont(new java.awt.Font("URW Gothic L", 0, 12)); // NOI18N
         jTextField5.setText("jTextField5");
+        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField5ActionPerformed(evt);
+            }
+        });
 
         jTextField6.setFont(new java.awt.Font("URW Gothic L", 0, 12)); // NOI18N
         jTextField6.setText("jTextField6");
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("RECHAZAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -125,7 +152,7 @@ public class panelAltaCliente extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(jButton1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -185,13 +212,35 @@ public class panelAltaCliente extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+       panelAlta p = new panelAlta();
+        
+        Principal_datos.main.cambiarPanel(p);
+    }                                        
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField5ActionPerformed
+
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField6ActionPerformed
+
+/*
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         panelAlta p = new panelAlta();
         
         Principal_datos.main.cambiarPanel(p);
     }//GEN-LAST:event_jButton1ActionPerformed
-
-
+*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
