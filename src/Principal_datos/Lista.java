@@ -99,7 +99,7 @@ public class Lista<T>
 	nElementos--;
 	return elemActual.datos; // Se devuelve el elemento borrado
 	
-	// El elemento referenciado por elemActual ser� enviado al recolector por ser elemActual una variable local y no tener m�s referencias ese objeto.
+	// El elemento referenciado por elemActual ser� enviado al recolector por ser elemActual una variable local y no tener mas referencias ese objeto.
   }
   
   public T borrarPrimero()

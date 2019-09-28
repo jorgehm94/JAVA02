@@ -25,7 +25,7 @@ public abstract class Persona {
         this.codigo = codigo;
         this.deuda = deuda;
         this.nombre = nombre;
-        GregorianCalendar fecha = new GregorianCalendar();
+        GregorianCalendar fecha = new GregorianCalendar(dia, mes, año);
     }
     
     Persona()
@@ -49,8 +49,19 @@ public abstract class Persona {
         System.out.println("Introduzca la deuda que tiene (0 si no tiene): ");
         deuda = Leer.datoFloat();
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public GregorianCalendar getFecha() {
+        return fecha;
+    }
+
+
     
-    public abstract void getDato();
+    
+    public abstract int getDato();
     
     //public abstract void perteneceDesde();
     

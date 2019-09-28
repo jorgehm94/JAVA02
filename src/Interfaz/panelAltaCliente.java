@@ -5,6 +5,9 @@
  */
 package Interfaz;
 
+import static Interfaz.ventanaPrincipal.listemp;
+import Principal_datos.Cliente;
+
 /**
  *
  * @author alumno
@@ -16,16 +19,22 @@ public class panelAltaCliente extends javax.swing.JPanel {
      */
     public panelAltaCliente() {
         initComponents();
+        
+        vaciarCampos();   
+    }
+    
+    
+    //Esta funcion borra lo que haya dentro de los TextFields
+    private void vaciarCampos()
+    {
         jTextField1.setText("");
         jTextField2.setText("");
         jTextField3.setText("");
         jTextField4.setText("");
         jTextField5.setText("");
         jTextField6.setText("");
-                
-        
-        
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -67,7 +76,7 @@ public class panelAltaCliente extends javax.swing.JPanel {
         jLabel4.setText("DEUDA");
 
         jLabel5.setFont(new java.awt.Font("URW Gothic L", 1, 12)); // NOI18N
-        jLabel5.setText("FECHA");
+        jLabel5.setText("FECHA - FORMATO (DD/MM/AA)");
 
         jLabel6.setFont(new java.awt.Font("URW Gothic L", 1, 12)); // NOI18N
         jLabel6.setText("DIRECCION");
@@ -129,6 +138,11 @@ public class panelAltaCliente extends javax.swing.JPanel {
         });
 
         jButton2.setText("ACEPTAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -152,7 +166,7 @@ public class panelAltaCliente extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(jButton1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -241,6 +255,43 @@ public class panelAltaCliente extends javax.swing.JPanel {
         Principal_datos.main.cambiarPanel(p);
     }//GEN-LAST:event_jButton1ActionPerformed
 */
+    //Boton aceptar
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       
+        //Capturamos los texfields
+        String nombreCaptura = jTextField1.getText();
+        String codigoCaptura  = jTextField2.getText();
+        String deudaCaptura  = jTextField3.getText();
+        String fechaCaptura  = jTextField4.getText();
+        String direccionCaptura  = jTextField5.getText();
+        String saldoCaptura  = jTextField6.getText();
+        
+        //Pasamos de String a entero aquellos campos que sea necesario
+        int cod = Integer.parseInt(codigoCaptura); //codigo
+        float deu = Float.parseFloat(deudaCaptura); //deuda
+        int sal = Integer.parseInt(saldoCaptura); //saldo
+        
+        //La fecha que esta en formato String capturamos de forma dividida el dia, mes y año
+        //El formato dd/mm/aaaa es muy importante cumplirlo
+        int dia = Integer.parseInt(fechaCaptura.substring(0, 2));
+        int mes = Integer.parseInt (fechaCaptura.substring(3,5));
+        int año = Integer.parseInt (fechaCaptura.substring(6, 10));
+        
+        //Creamos el objeto
+        //public Cliente(int saldo, String direccion, int codigo, float deuda, String nombre, int dia, int mes, int año)
+        
+        Cliente objetoCliente = new Cliente (sal, direccionCaptura, cod, deu, nombreCaptura, dia, mes, año);
+        
+        //Se añade a la lista
+        //Devuelve falso en el caso de que no se pueda meter el objeto Cliente
+        Boolean bandera = listemp.anadirAlFinal(objetoCliente);
+        
+        //Llamamos a la funcion de vaciar campos
+        vaciarCampos();
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

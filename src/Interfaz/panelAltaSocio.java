@@ -5,6 +5,11 @@
  */
 package Interfaz;
 
+import static Interfaz.ventanaPrincipal.contador;
+import static Interfaz.ventanaPrincipal.listemp;
+import Principal_datos.Lista;
+import Principal_datos.Socio;
+
 /**
  *
  * @author alumno
@@ -17,17 +22,20 @@ public class panelAltaSocio extends javax.swing.JPanel {
     public panelAltaSocio() {
         initComponents();
         
-        
+        vaciarCampos();
+    }
+
+    //Esta funcion borra lo que haya dentro de los TextFields
+    private void vaciarCampos()
+    {
         jTextField1.setText("");
         jTextField2.setText("");
         jTextField3.setText("");
         jTextField4.setText("");
         jTextField5.setText("");
         jTextField6.setText("");
-        
-        
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,7 +73,7 @@ public class panelAltaSocio extends javax.swing.JPanel {
         jLabel4.setText("DEUDA");
 
         jLabel5.setFont(new java.awt.Font("URW Gothic L", 1, 12)); // NOI18N
-        jLabel5.setText("FECHA");
+        jLabel5.setText("FECHA - FORMATO (DD-MM-AAAA)");
 
         jLabel6.setFont(new java.awt.Font("URW Gothic L", 1, 12)); // NOI18N
         jLabel6.setText("COMISIÓN");
@@ -105,6 +113,11 @@ public class panelAltaSocio extends javax.swing.JPanel {
         jLabel1.setText("REGISTRO DE SOCIO");
 
         jButton2.setText("ACEPTAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("RECHAZAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -122,20 +135,21 @@ public class panelAltaSocio extends javax.swing.JPanel {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
+                        .addGap(40, 40, 40)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel4))
-                            .addComponent(jLabel7)))
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -208,6 +222,44 @@ public class panelAltaSocio extends javax.swing.JPanel {
         Principal_datos.main.cambiarPanel(p);
     }//GEN-LAST:event_jButton1ActionPerformed
 */
+    //Boton de aceptar
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        //Capturamos los texfields
+        String nombreCaptura = jTextField1.getText();
+        String codigoCaptura  = jTextField2.getText();
+        String deudaCaptura  = jTextField3.getText();
+        String fechaCaptura  = jTextField4.getText();
+        String comisionCaptura  = jTextField5.getText();
+        String añoDesdeCaptura  = jTextField6.getText();
+        
+        //Pasamos de String a entero aquellos campos que sea necesario
+        int cod = Integer.parseInt(codigoCaptura); //codigo
+        float deu = Float.parseFloat(deudaCaptura); //deuda
+        float com = Float.parseFloat(comisionCaptura); //comision
+        int aD = Integer.parseInt(añoDesdeCaptura); //añoDesde
+        
+        //La fecha que esta en formato String capturamos de forma dividida el dia, mes y año
+        //El formato dd/mm/aaaa es muy importante cumplirlo
+        int dia = Integer.parseInt(fechaCaptura.substring(0, 2));
+        int mes = Integer.parseInt (fechaCaptura.substring(3,5));
+        int año = Integer.parseInt (fechaCaptura.substring(6, 10));
+        
+
+        
+        //Creamos el objeto
+        //public Socio(int añoDesde, float comision, int codigo, float deuda, String nombre, int dia, int mes, int año) {
+        Socio objetoSocio = new Socio(aD,com,cod, deu, nombreCaptura, dia, mes, año);
+        
+        //Lo metemos en la lista
+        //Devuelve falso en el caso de que no se pueda meter el objeto Socio
+        Boolean bandera = listemp.anadirAlFinal(objetoSocio);
+        
+        //Llamamos a la funcion de vaciar campos
+        vaciarCampos();
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

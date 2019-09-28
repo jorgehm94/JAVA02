@@ -31,6 +31,9 @@ public class ventanaPrincipal extends javax.swing.JFrame {
     
     protected static Lista<Persona> listemp = new Lista<Persona>();
     
+    //Contador 
+    protected static int contador = 0;
+    
     public ventanaPrincipal() {
        
         initComponents();

@@ -3,12 +3,12 @@ package Principal_datos;
 
 public class Cliente extends Persona{
     private int saldo;
-    private Domicilio viveEn;
+    private String direccion;
 
-    public Cliente(int saldo, Domicilio viveEn) {
-        super();
+    public Cliente(int saldo, String direccion, int codigo, float deuda, String nombre, int dia, int mes, int año) {
+        super(codigo, deuda, nombre, dia, mes, año);
         this.saldo = saldo;
-        this.viveEn = viveEn;
+        this.direccion = direccion;
         
     }
     
@@ -17,27 +17,22 @@ public class Cliente extends Persona{
         //this();
     }
 
-    public int getSaldo() {
-        return saldo;
-    }
-
     public void setSaldo(int saldo) {
-        System.out.println("Introduzca el saldo del Cliente: ");
-        saldo = Leer.datoInt();
+        this.saldo = saldo;
     }
 
-    public Domicilio getViveEn() {
-        return viveEn;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setViveEn(Domicilio viveEn) {
-        this.viveEn = viveEn;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
    
     
-    public void getDato()
+    public int getDato()
     {
-        System.out.println("Su dinero es: "+saldo);
+        return saldo;
         
     }
     

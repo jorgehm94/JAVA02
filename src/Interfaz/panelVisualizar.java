@@ -5,6 +5,14 @@
  */
 package Interfaz;
 
+//Importamos el contador estatico que esta inicializado a cero y la lista de la clase ventanaPrincipal
+//Tambien exportamos la clase Persona
+import static Interfaz.ventanaPrincipal.contador;
+import static Interfaz.ventanaPrincipal.listemp;
+import Principal_datos.Cliente;
+import Principal_datos.Persona;
+import Principal_datos.Socio;
+
 /**
  *
  * @author alumno
@@ -17,17 +25,60 @@ public class panelVisualizar extends javax.swing.JPanel {
     public panelVisualizar() {
         initComponents();
         
+        
+        //Se pasa del texfield numero 4 al 6 ya que el 5 se ha eliminado 
         jTextField1.setText("");
         jTextField2.setText("");
         jTextField3.setText("");
         jTextField4.setText("");
-        jTextField5.setText("");
         jTextField6.setText("");
         jTextField7.setText("");
         
-        
+        mostrarPersona();
+  
     }
-
+    
+     private void mostrarPersona()
+     {
+       
+        //Obtenemos el primer objeto llamando al metodo "obtener" de la clase "lista" pasandole un contador 
+        Persona objeto = listemp.obtener(contador);
+        
+        //Se rellenan los TextFields que son comunes para cualquier tipo de objeto
+        jTextField1.setText(""+objeto.getNombre());
+        jTextField2.setText(""+objeto.getCodigo());
+        jTextField3.setText(""+objeto.getDeuda());
+        jTextField4.setText(""+objeto.getFecha());
+        
+        
+        
+        //Se hace un casting para saber si el objeto de la clase "Persona" es de tipo "Socio" o "Cliente"
+        if (objeto instanceof Socio)
+        {
+            //Se le cambia el nombre a las etiquetas
+            jLabel7.setText("SOCIO DESDE");
+            jLabel8.setText("COMISION");
+            
+            //Se rellenan los TextFields del objeto en cuestion
+            jTextField6.setText(""+((Socio) objeto).getDato());
+            jTextField7.setText(""+ ((Socio) objeto).getComision());
+        }
+        
+        if (objeto instanceof Cliente)
+        {
+            
+            //Se le cambia el nombre a las etiquetas
+            jLabel7.setText("SALDO");
+            jLabel8.setText("DIRECCION");
+            
+            //Se rellenan los TextFields del objeto en cuestion
+            jTextField6.setText(""+((Cliente) objeto).getDato());
+            jTextField7.setText(""+ ((Cliente) objeto).getDireccion());
+        }
+        
+        if (contador == 0) //Al prinicipio el boron anterior estara desactivado
+            jButton1.setEnabled(false);
+     }
     
     
     /**
@@ -41,20 +92,17 @@ public class panelVisualizar extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jProgressBar1 = new javax.swing.JProgressBar();
         jLabel8 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
 
@@ -68,8 +116,18 @@ public class panelVisualizar extends javax.swing.JPanel {
         jLabel1.setRequestFocusEnabled(false);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/atras.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/adelante.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/adelante.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jTextField1.setFont(new java.awt.Font("URW Gothic L", 0, 12)); // NOI18N
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -104,13 +162,6 @@ public class panelVisualizar extends javax.swing.JPanel {
         jTextField4.setFocusCycleRoot(true);
         jTextField4.setRequestFocusEnabled(false);
 
-        jTextField5.setFont(new java.awt.Font("URW Gothic L", 0, 12)); // NOI18N
-        jTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField5.setText("jTextField5");
-        jTextField5.setBorder(null);
-        jTextField5.setFocusCycleRoot(true);
-        jTextField5.setRequestFocusEnabled(false);
-
         jTextField6.setFont(new java.awt.Font("URW Gothic L", 0, 12)); // NOI18N
         jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField6.setText("jTextField6");
@@ -123,53 +174,43 @@ public class panelVisualizar extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("URW Gothic L", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("URW Gothic L", 1, 16)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel2.setText("NOMBRE");
         jLabel2.setAutoscrolls(true);
         jLabel2.setFocusCycleRoot(true);
         jLabel2.setRequestFocusEnabled(false);
 
-        jLabel3.setFont(new java.awt.Font("URW Gothic L", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("URW Gothic L", 1, 16)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel3.setText("CÓDIGO");
         jLabel3.setAutoscrolls(true);
         jLabel3.setFocusCycleRoot(true);
         jLabel3.setRequestFocusEnabled(false);
 
-        jLabel4.setFont(new java.awt.Font("URW Gothic L", 1, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("URW Gothic L", 1, 16)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel4.setText("DEUDA");
         jLabel4.setAutoscrolls(true);
         jLabel4.setFocusCycleRoot(true);
         jLabel4.setRequestFocusEnabled(false);
 
-        jLabel5.setFont(new java.awt.Font("URW Gothic L", 1, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("URW Gothic L", 1, 16)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel5.setText("FECHA");
         jLabel5.setAutoscrolls(true);
         jLabel5.setFocusCycleRoot(true);
         jLabel5.setRequestFocusEnabled(false);
 
-        jLabel6.setFont(new java.awt.Font("URW Gothic L", 1, 18)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel6.setText("DOMICILIO");
-        jLabel6.setAutoscrolls(true);
-        jLabel6.setFocusCycleRoot(true);
-        jLabel6.setRequestFocusEnabled(false);
-
-        jLabel7.setFont(new java.awt.Font("URW Gothic L", 1, 18)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("URW Gothic L", 1, 16)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel7.setText("AÑO DESDE / SALDO");
         jLabel7.setAutoscrolls(true);
         jLabel7.setFocusCycleRoot(true);
         jLabel7.setRequestFocusEnabled(false);
 
-        jProgressBar1.setForeground(new java.awt.Color(51, 255, 51));
-        jProgressBar1.setAutoscrolls(true);
-
-        jLabel8.setFont(new java.awt.Font("URW Gothic L", 1, 18)); // NOI18N
-        jLabel8.setText("DIRECC. / NºHIJOS");
+        jLabel8.setFont(new java.awt.Font("URW Gothic L", 1, 16)); // NOI18N
+        jLabel8.setText("DIRECC. / COMISION");
 
         jTextField7.setFont(new java.awt.Font("URW Gothic L", 0, 12)); // NOI18N
         jTextField7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -190,10 +231,8 @@ public class panelVisualizar extends javax.swing.JPanel {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(38, 38, 38)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,11 +241,10 @@ public class panelVisualizar extends javax.swing.JPanel {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
                             .addGap(4, 4, 4))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -215,21 +253,20 @@ public class panelVisualizar extends javax.swing.JPanel {
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
-                    .addComponent(jTextField7))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                    .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE))
                 .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -245,23 +282,18 @@ public class panelVisualizar extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(138, 138, 138)
+                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(170, 170, 170)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -277,25 +309,57 @@ public class panelVisualizar extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField7ActionPerformed
 
+    
+    //BOTON DE AVANZAR
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        
+        //Si el contador es diferente al tamaño de la lista
+        if (contador != listemp.tamanio()-1)
+        {
+            contador++; // Se suma uno al contador
+            mostrarPersona(); //Se muestra los objetos de esa posicion
+            jButton1.setEnabled(true); // Y el boton anterior se habilita
+            
+            if (contador == listemp.tamanio()-1) // Si el contador es igual de grande que el tamaño de la lista
+            {
+                jButton2.setEnabled(false); // Se desactiva el boton avanzar
+            }
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    //BOTON DE RETROCEDER
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+       contador--; //Se resta uno a contador
+       
+       if (contador == 0) //Si el contador es igual a cero
+           jButton1.setEnabled(false); //Se desactiva el boton
+       
+       if (contador != listemp.tamanio()-1) //Si el contador es diferetnes al tamaño de la lista
+           jButton2.setEnabled(true); //Se activa el boton avanzar
+       
+       mostrarPersona(); //Se muestra el objeto conforme a la posicion
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
+
 }

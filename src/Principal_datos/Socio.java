@@ -16,44 +16,39 @@ import java.util.GregorianCalendar;
  */
 public class Socio extends Persona{
     private int añoDesde;
-    private Domicilio viveEn;
+    private float comision;
 
-    public Socio(int añoDesde, Domicilio viveEn) {
-        super();
+    public Socio(int añoDesde, float comision, int codigo, float deuda, String nombre, int dia, int mes, int año) {
+        super(codigo, deuda, nombre, dia, mes, año);
         this.añoDesde = añoDesde;
-        this.viveEn = viveEn;
+        this.comision = comision;
     }
     
     public Socio()
     {
-       // this();
+       
     }
 
-    public int getAñoDesde() {
-        return añoDesde;
+    public float getComision() {
+        return comision;
     }
 
-    public void setAñoDesde(int añoDesde) {
-        System.out.println("Introduzca el año desde que es socio: ");
-        añoDesde = Leer.datoInt();
+    public void setComision(int comision) {
+        this.comision = comision;
+    }
+    
+    public void setAñoDesde(int año) {
+        this.añoDesde = año;
     }
     
     public void setCampoFecha ( GregorianCalendar obj)
     {
         fecha = obj;
     }
-
-    public Domicilio getViveEn() {
-        return viveEn;
-    }
-
-    public void setViveEn(Domicilio viveEn) {
-        this.viveEn = viveEn;
-    }
     
-    public void getDato()
+    public int getDato()
     {
-        System.out.println("Pertenece desde: "+añoDesde);
+        return this.añoDesde;
     }
 
     
