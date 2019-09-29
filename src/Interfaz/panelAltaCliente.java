@@ -7,6 +7,8 @@ package Interfaz;
 
 import static Interfaz.ventanaPrincipal.listemp;
 import Principal_datos.Cliente;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -80,7 +82,7 @@ public class panelAltaCliente extends javax.swing.JPanel {
         jLabel4.setText("DEUDA");
 
         jLabel5.setFont(new java.awt.Font("URW Gothic L", 1, 12)); // NOI18N
-        jLabel5.setText("FECHA - FORMATO (DD/MM/AA)");
+        jLabel5.setText("FECHA ");
 
         jLabel6.setFont(new java.awt.Font("URW Gothic L", 1, 12)); // NOI18N
         jLabel6.setText("DIRECCION");
@@ -174,7 +176,7 @@ public class panelAltaCliente extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(jButton1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton2)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -212,11 +214,11 @@ public class panelAltaCliente extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField4)
-                            .addComponent(jLabel5)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextField8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -288,16 +290,27 @@ public class panelAltaCliente extends javax.swing.JPanel {
         float deu = Float.parseFloat(deudaCaptura); //deuda
         int sal = Integer.parseInt(saldoCaptura); //saldo
         
-        //La fecha que esta en formato String capturamos de forma dividida el dia, mes y año
-        //El formato dd/mm/aaaa es muy importante cumplirlo
-        int dia = Integer.parseInt(diaCaptura);
-        int mes = Integer.parseInt(mesCaptura);
-        int año = Integer.parseInt(añoCaptura);
+        //Hace falta inicializarlos a 0
+        int dia= 0, mes=0, año=0;
         
+        if (diaCaptura.isEmpty() && mesCaptura.isEmpty() && añoCaptura.isEmpty())
+        {
+                Calendar fecha = new GregorianCalendar();
+                dia = establecerDiaSistema(fecha);
+                mes = establecerMesSistema(fecha);
+                año = establecerAñoSistema(fecha);
+        }
+        else
+        {
+            //La fecha que esta en formato String capturamos de forma dividida el dia, mes y año
+             dia = Integer.parseInt(diaCaptura);
+             mes = Integer.parseInt(mesCaptura);
+             año = Integer.parseInt(añoCaptura);
+        }
         //Creamos el objeto
         //public Cliente(int saldo, String direccion, int codigo, float deuda, String nombre, int dia, int mes, int año)
         
-        Cliente objetoCliente = new Cliente (sal, direccionCaptura, cod, deu, nombreCaptura, dia, mes, año);
+        Cliente objetoCliente = new Cliente (sal, direccionCaptura, cod, deu, nombreCaptura, dia, (mes-1), año);
         
         //Se añade a la lista
         //Devuelve falso en el caso de que no se pueda meter el objeto Cliente
@@ -309,6 +322,31 @@ public class panelAltaCliente extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private int establecerDiaSistema(Calendar fecha)
+    {
+  
+        int dia = fecha.get(Calendar.DAY_OF_MONTH);
+        return dia;
+    }
+    
+    private int establecerMesSistema(Calendar fecha)
+    {
+  
+        int mes = fecha.get(Calendar.MONTH);
+        return mes;
+    }
+
+        
+    private int establecerAñoSistema(Calendar fecha)
+    {
+  
+        int año = fecha.get(Calendar.YEAR);
+        return año;
+    }
+
+
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

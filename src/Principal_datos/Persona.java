@@ -57,9 +57,6 @@ public abstract class Persona {
     public GregorianCalendar getFecha() {
         return fecha;
     }
-
-
-    
     
     public abstract int getDato();
     
