@@ -12,6 +12,8 @@ import static Interfaz.ventanaPrincipal.listemp;
 import Principal_datos.Cliente;
 import Principal_datos.Persona;
 import Principal_datos.Socio;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -43,19 +45,21 @@ public class panelVisualizar extends javax.swing.JPanel {
        
         //Obtenemos el primer objeto llamando al metodo "obtener" de la clase "lista" pasandole un contador 
         Persona objeto = listemp.obtener(contador);
+        GregorianCalendar fecha = objeto.getFecha();
         
         //Se rellenan los TextFields que son comunes para cualquier tipo de objeto
         jTextField1.setText(""+objeto.getNombre());
         jTextField2.setText(""+objeto.getCodigo());
         jTextField3.setText(""+objeto.getDeuda());
-        jTextField4.setText(""+objeto.getFecha());
-        
-        
+        jTextField4.setText(""+fecha.get(Calendar.DAY_OF_MONTH));
+        jTextField5.setText(""+(fecha.get(Calendar.MONTH)+1));
+        jTextField8.setText(""+fecha.get(Calendar.YEAR));
         
         //Se hace un casting para saber si el objeto de la clase "Persona" es de tipo "Socio" o "Cliente"
         if (objeto instanceof Socio)
         {
             //Se le cambia el nombre a las etiquetas
+            jLabel2.setText("NOMBRE SOCIO");
             jLabel7.setText("SOCIO DESDE");
             jLabel8.setText("COMISION");
             
@@ -66,7 +70,7 @@ public class panelVisualizar extends javax.swing.JPanel {
         
         if (objeto instanceof Cliente)
         {
-            
+             jLabel2.setText("NOMBRE CLIENTE");
             //Se le cambia el nombre a las etiquetas
             jLabel7.setText("SALDO");
             jLabel8.setText("DIRECCION");
@@ -78,6 +82,9 @@ public class panelVisualizar extends javax.swing.JPanel {
         
         if (contador == 0) //Al prinicipio el boron anterior estara desactivado
             jButton1.setEnabled(false);
+        
+        if(listemp.tamanio()==1)
+            jButton2.setEnabled(false);
      }
     
     
@@ -105,6 +112,8 @@ public class panelVisualizar extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
+        jTextField5 = new javax.swing.JTextField();
+        jTextField8 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(0, 153, 153));
 
@@ -221,6 +230,10 @@ public class panelVisualizar extends javax.swing.JPanel {
             }
         });
 
+        jTextField5.setText("jTextField5");
+
+        jTextField8.setText("jTextField8");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -244,7 +257,7 @@ public class panelVisualizar extends javax.swing.JPanel {
                                 .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGap(4, 4, 4))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -253,12 +266,17 @@ public class panelVisualizar extends javax.swing.JPanel {
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1)
+                    .addComponent(jTextField2)
+                    .addComponent(jTextField3)
+                    .addComponent(jTextField6)
+                    .addComponent(jTextField7))
                 .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
@@ -281,7 +299,10 @@ public class panelVisualizar extends javax.swing.JPanel {
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -320,13 +341,12 @@ public class panelVisualizar extends javax.swing.JPanel {
             contador++; // Se suma uno al contador
             mostrarPersona(); //Se muestra los objetos de esa posicion
             jButton1.setEnabled(true); // Y el boton anterior se habilita
-            
-            if (contador == listemp.tamanio()-1) // Si el contador es igual de grande que el tamaño de la lista
-            {
-                jButton2.setEnabled(false); // Se desactiva el boton avanzar
-            }
+
         }
-        
+         if (contador == listemp.tamanio()-1) // Si el contador es igual de grande que el tamaño de la lista
+         {
+               jButton2.setEnabled(false); // Se desactiva el boton avanzar
+         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     //BOTON DE RETROCEDER
@@ -358,8 +378,10 @@ public class panelVisualizar extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
     // End of variables declaration//GEN-END:variables
 
 }

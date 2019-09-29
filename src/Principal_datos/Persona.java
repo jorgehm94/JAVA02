@@ -1,6 +1,7 @@
 package Principal_datos;
 
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /*
@@ -17,7 +18,7 @@ public abstract class Persona {
     private String nombre;
     private int codigo;
     private float deuda; //No es seguro, como ejemplo 
-    GregorianCalendar fecha;
+    private GregorianCalendar fecha;
     
     Persona(int codigo, float deuda, String nombre, int dia, int mes, int año )
     {
@@ -25,7 +26,7 @@ public abstract class Persona {
         this.codigo = codigo;
         this.deuda = deuda;
         this.nombre = nombre;
-        GregorianCalendar fecha = new GregorianCalendar(dia, mes, año);
+        fecha = new GregorianCalendar(año, mes, dia);
     }
     
     Persona()

@@ -7,10 +7,12 @@ package Interfaz;
 
 import static Interfaz.ventanaPrincipal.contador;
 import static Interfaz.ventanaPrincipal.listemp;
+import Principal_datos.Cliente;
 import Principal_datos.Lista;
 import Principal_datos.Socio;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,6 +20,7 @@ import java.util.GregorianCalendar;
  */
 public class panelAltaSocio extends javax.swing.JPanel {
 
+    private boolean fechaSistema = false;
     /**
      * Creates new form panelAltaSocio
      */
@@ -67,6 +70,7 @@ public class panelAltaSocio extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jTextField7 = new javax.swing.JTextField();
         jTextField8 = new javax.swing.JTextField();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         setBackground(new java.awt.Color(0, 153, 153));
 
@@ -137,19 +141,29 @@ public class panelAltaSocio extends javax.swing.JPanel {
 
         jTextField8.setText("jTextField8");
 
+        jCheckBox1.setText("Fecha del sistema");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(73, Short.MAX_VALUE)
+                .addContainerGap(35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel5)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(jCheckBox1))
                             .addComponent(jLabel7)
                             .addComponent(jLabel4)
                             .addComponent(jButton1))
@@ -199,7 +213,9 @@ public class panelAltaSocio extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel5)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jCheckBox1))))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -240,51 +256,98 @@ public class panelAltaSocio extends javax.swing.JPanel {
     //Boton de aceptar
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
-        //Capturamos los texfields
-        String nombreCaptura = jTextField1.getText();
-        String codigoCaptura  = jTextField2.getText();
-        String deudaCaptura  = jTextField3.getText();
-        String diaCaptura  = jTextField4.getText();
-        String mesCaptura = jTextField7.getText();
-        String añoCaptura = jTextField8.getText();
-        String comisionCaptura  = jTextField5.getText();
-        String añoDesdeCaptura  = jTextField6.getText();
-        
-        //Pasamos de String a entero aquellos campos que sea necesario
-        int cod= Integer.parseInt(codigoCaptura); //codigo
-        float deu = Float.parseFloat(deudaCaptura); //deuda
-        float com = Float.parseFloat(comisionCaptura); //comision
-        int aD = Integer.parseInt(añoDesdeCaptura); //añoDesde
-        
-        //Hace falta inicializarlos a 0
-        int dia= 0, mes=0, año=0;
-        
-        if (diaCaptura.isEmpty() && mesCaptura.isEmpty() && añoCaptura.isEmpty())
-        {
+        try {
+            //Capturamos los texfields
+            String nombreCaptura = jTextField1.getText();
+            String codigoCaptura = jTextField2.getText();
+            String deudaCaptura = jTextField3.getText();
+            String diaCaptura = jTextField4.getText();
+            String mesCaptura = jTextField7.getText();
+            String añoCaptura = jTextField8.getText();
+            String comisionCaptura = jTextField5.getText();
+            String añoDesdeCaptura = jTextField6.getText();
+
+            //Pasamos de String a entero aquellos campos que sea necesario
+            int cod = Integer.parseInt(codigoCaptura); //codigo
+            float deu = Float.parseFloat(deudaCaptura); //deuda
+            float com = Float.parseFloat(comisionCaptura); //comision
+            int aD = Integer.parseInt(añoDesdeCaptura); //añoDesde
+
+            //Hace falta inicializarlos a 0
+            int dia = 0, mes = 0, año = 0;
+            
+            if (fechaSistema==true) {
                 Calendar fecha = new GregorianCalendar();
                 dia = establecerDiaSistema(fecha);
                 mes = establecerMesSistema(fecha);
                 año = establecerAñoSistema(fecha);
+            } else {
+                //La fecha que esta en formato String capturamos de forma dividida el dia, mes y año
+                dia = Integer.parseInt(diaCaptura);
+                mes = Integer.parseInt(mesCaptura);
+                año = Integer.parseInt(añoCaptura);
+            }
+            //Creamos el objeto
+            //public Socio(int añoDesde, float comision, int codigo, float deuda, String nombre, int dia, int mes, int año) {
+             
+             
+             if(panelAltaCliente.comprobarFecha(dia, mes, año)){
+                 Socio objetoSocio = new Socio(aD, com, cod, deu, nombreCaptura, dia, (mes - 1), año);
+              
+                //Devuelve falso en el caso de que no se pueda meter el objeto Socio
+                Boolean bandera = listemp.anadirAlFinal(objetoSocio);
+                //Llamamos a la funcion de vaciar campos
+                vaciarCampos();
+                
+                 JOptionPane.showMessageDialog(null, "Listo", "Todo bien y todo correcto", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Error en la fecha", "Fecha error", JOptionPane.WARNING_MESSAGE);
+                // Vaciar campo de la fecha 
+                jTextField4.setText("");
+                jTextField7.setText("");
+                jTextField8.setText("");
+            }
+
+            
+        } catch (NumberFormatException e) {
+             JOptionPane.showMessageDialog(null, "Algun error en la introduccion de datos", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+         // desactivar el boton de fecha del sistema
+            jCheckBox1.setSelected(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+         Calendar fecha = new GregorianCalendar();
+        if(jCheckBox1.isSelected()==true)
+        {
+            
+            jTextField4.setEditable(false);
+            jTextField7.setEditable(false);
+            jTextField8.setEditable(false);
+            
+            jTextField4.setText(""+establecerDiaSistema(fecha));
+            jTextField7.setText(""+establecerMesSistema(fecha));
+            jTextField8.setText(""+establecerAñoSistema(fecha));
+            
+            fechaSistema=true;
+            
         }
         else
         {
-            //La fecha que esta en formato String capturamos de forma dividida el dia, mes y año
-             dia = Integer.parseInt(diaCaptura);
-             mes = Integer.parseInt(mesCaptura);
-             año = Integer.parseInt(añoCaptura);
+            jTextField4.setEditable(true);
+            jTextField7.setEditable(true);
+            jTextField8.setEditable(true);
+            
+            jTextField4.setText("");
+            jTextField7.setText("");
+            jTextField8.setText("");
+            
+            fechaSistema=false;
         }
-        //Creamos el objeto
-        //public Socio(int añoDesde, float comision, int codigo, float deuda, String nombre, int dia, int mes, int año) {
-        Socio objetoSocio = new Socio(aD,com,cod, deu, nombreCaptura, dia, (mes-1), año);
-        
-        //Lo metemos en la lista
-        //Devuelve falso en el caso de que no se pueda meter el objeto Socio
-        Boolean bandera = listemp.anadirAlFinal(objetoSocio);
-        
-        //Llamamos a la funcion de vaciar campos
-        vaciarCampos();
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
      private int establecerDiaSistema(Calendar fecha)
     {
@@ -311,6 +374,7 @@ public class panelAltaSocio extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

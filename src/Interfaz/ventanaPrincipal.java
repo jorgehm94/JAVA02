@@ -15,6 +15,7 @@ import java.awt.Container;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -196,10 +197,7 @@ public class ventanaPrincipal extends javax.swing.JFrame {
        
 
          if(listemp.tamanio()==0){
-             Error e = new Error();
-             
-             e.setVisible(true);
-             
+             JOptionPane.showMessageDialog(null, "La lista se encuentra actualmente vacia", "Error",JOptionPane.WARNING_MESSAGE);
              jMenuItem4.setEnabled(false);
              
          }

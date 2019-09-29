@@ -41,11 +41,6 @@ public class Socio extends Persona{
         this.añoDesde = año;
     }
     
-    public void setCampoFecha ( GregorianCalendar obj)
-    {
-        fecha = obj;
-    }
-    
     public int getDato()
     {
         return this.añoDesde;
