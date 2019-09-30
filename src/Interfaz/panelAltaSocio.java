@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author alumno
+ * @author Jorge Herrera, Sergio Ruiz
  */
 public class panelAltaSocio extends javax.swing.JPanel {
 
@@ -289,11 +289,10 @@ public class panelAltaSocio extends javax.swing.JPanel {
                 año = Integer.parseInt(añoCaptura);
             }
             
-            //public Socio(int añoDesde, float comision, int codigo, float deuda, String nombre, int dia, int mes, int año) {
              
              //Llamamos a la funcion "ComprobarFecha" para validar datos de entrada, que se encuentra en "panelAltaCliente"
              if(panelAltaCliente.comprobarFecha(dia, mes, año)){
-                 Socio objetoSocio = new Socio(aD, com, cod, deu, nombreCaptura, dia, (mes - 1), año);//Creamos el objeto
+                 Socio objetoSocio = new Socio(aD, com, cod, deu, nombreCaptura, dia, mes, año);//Creamos el objeto
               
                 //Devuelve falso en el caso de que no se pueda meter el objeto Socio
                 Boolean bandera = listemp.anadirAlFinal(objetoSocio);
@@ -317,8 +316,6 @@ public class panelAltaSocio extends javax.swing.JPanel {
              JOptionPane.showMessageDialog(null, "Algun error en la introduccion de datos", "Error", JOptionPane.INFORMATION_MESSAGE);
         }
         
-         // desactivamos el boton de fecha del sistema
-            jCheckBox1.setSelected(false);
     }//GEN-LAST:event_jButton2ActionPerformed
     // Si el usuario clickea en el cuadro de fecha del sistema, la añadimos y dejamos el boton sin poder editarlo.
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
@@ -331,7 +328,7 @@ public class panelAltaSocio extends javax.swing.JPanel {
             jTextField8.setEditable(false);
             
             jTextField4.setText(""+establecerDiaSistema(fecha));
-            jTextField7.setText(""+establecerMesSistema(fecha));
+             jTextField7.setText(""+(establecerMesSistema(fecha)+1));
             jTextField8.setText(""+establecerAñoSistema(fecha));
             
             fechaSistema=true;

@@ -7,7 +7,7 @@ package Interfaz;
 
 /**
  *
- * @author alumno
+ * @author Jorge Herrera, Sergio Ruiz
  */
 public class panelAlta extends javax.swing.JPanel {
 

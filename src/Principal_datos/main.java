@@ -1,5 +1,7 @@
 package Principal_datos;
 
+// Jorge Herrera, Sergio Ruiz
+
 import Interfaz.ventanaPrincipal;
 import javax.swing.JPanel;
 
@@ -24,5 +26,9 @@ public class main {
         prog.pack();
     }
 
+    public static void cambiarTamaño(int ancho, int altura)
+    {
+        prog.setSize(ancho, altura);
+    }
     
 }

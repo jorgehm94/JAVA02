@@ -20,7 +20,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author alumno
+ * @author Jorge Herrera, Sergio Ruiz
  */
 public class ventanaPrincipal extends javax.swing.JFrame {
     
@@ -203,7 +203,6 @@ public class ventanaPrincipal extends javax.swing.JFrame {
          }
          else
          {
-
 
             // Desactivar el boton de VisualizarDatos
             jMenuItem4.setEnabled(false);

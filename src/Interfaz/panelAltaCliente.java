@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author alumno
+ * @author Jorge Herrera, Sergio Ruiz
  */
 public class panelAltaCliente extends javax.swing.JPanel {
 
@@ -293,7 +293,17 @@ public class panelAltaCliente extends javax.swing.JPanel {
 */
     //Boton aceptar
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       
+
+        jCheckBox1.setSelected(false);
+        
+        jTextField4.setEnabled(true);
+        jTextField7.setEnabled(true);
+        jTextField8.setEnabled(true);
+        
+        jTextField4.setText("");
+        jTextField7.setText("");
+        jTextField8.setText("");
+        
         try {
             //Capturamos los texfields
             String nombreCaptura = jTextField1.getText();
@@ -330,7 +340,7 @@ public class panelAltaCliente extends javax.swing.JPanel {
             
             //Llamamos a la funcion "ComprobarFecha" para validar datos de entrada
             if(comprobarFecha(dia, mes, año)){
-                Cliente objetoCliente = new Cliente(sal, direccionCaptura, cod, deu, nombreCaptura, dia, (mes - 1), año); //Creamos el objeto
+                Cliente objetoCliente = new Cliente(sal, direccionCaptura, cod, deu, nombreCaptura, dia, mes, año); //Creamos el objeto
                 //Se añade a la lista
             //Devuelve falso en el caso de que no se pueda meter el objeto Cliente
             Boolean bandera = listemp.anadirAlFinal(objetoCliente);
@@ -428,7 +438,7 @@ public class panelAltaCliente extends javax.swing.JPanel {
             jTextField8.setEditable(false);
             
             jTextField4.setText(""+establecerDiaSistema(fecha));
-            jTextField7.setText(""+establecerMesSistema(fecha));
+            jTextField7.setText(""+(establecerMesSistema(fecha)+1));
             jTextField8.setText(""+establecerAñoSistema(fecha));
             
             fechaSistema=true;
