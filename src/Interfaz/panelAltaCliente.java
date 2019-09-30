@@ -228,12 +228,16 @@ public class panelAltaCliente extends javax.swing.JPanel {
                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel5)
-                                .addComponent(jCheckBox1)))
+                                .addComponent(jCheckBox1))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -309,6 +313,7 @@ public class panelAltaCliente extends javax.swing.JPanel {
             //Hace falta inicializarlos a 0
             int dia = 0, mes = 0, año = 0;
             
+            //Si el usuario indica que la fecha sea la del sistema
             if (fechaSistema==true) {
                 Calendar fecha = new GregorianCalendar();
                 dia = establecerDiaSistema(fecha);
@@ -320,11 +325,12 @@ public class panelAltaCliente extends javax.swing.JPanel {
                 mes = Integer.parseInt(mesCaptura);
                 año = Integer.parseInt(añoCaptura);
             }
-            //Creamos el objeto
+            
             //public Cliente(int saldo, String direccion, int codigo, float deuda, String nombre, int dia, int mes, int año)
             
+            //Llamamos a la funcion "ComprobarFecha" para validar datos de entrada
             if(comprobarFecha(dia, mes, año)){
-                Cliente objetoCliente = new Cliente(sal, direccionCaptura, cod, deu, nombreCaptura, dia, (mes - 1), año);
+                Cliente objetoCliente = new Cliente(sal, direccionCaptura, cod, deu, nombreCaptura, dia, (mes - 1), año); //Creamos el objeto
                 //Se añade a la lista
             //Devuelve falso en el caso de que no se pueda meter el objeto Cliente
             Boolean bandera = listemp.anadirAlFinal(objetoCliente);
@@ -332,10 +338,11 @@ public class panelAltaCliente extends javax.swing.JPanel {
             //Llamamos a la funcion de vaciar campos
             vaciarCampos();
 
+            //Mensaje por pantalla que muestra que el proceso de introduccion de datos ha ido bien
             JOptionPane.showMessageDialog(null, "Listo", "Todo bien y todo correcto", JOptionPane.INFORMATION_MESSAGE);
             
             }
-            else
+            else //Si la fecha es incorrecta, mandamos un error y vaciamos los campos de la fecha
             {
                 JOptionPane.showMessageDialog(null, "Error en la fecha", "Fecha error", JOptionPane.WARNING_MESSAGE);
                 // Vaciar campo de la fecha 
@@ -344,7 +351,7 @@ public class panelAltaCliente extends javax.swing.JPanel {
                 jTextField8.setText("");
             }
             
-            // desactivar el boton de fecha del sistema
+            // desactivamos el boton de fecha del sistema
             jCheckBox1.setSelected(false);
         }catch(NumberFormatException e)
         {
@@ -357,6 +364,7 @@ public class panelAltaCliente extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    //Funcion que comprueba la fecha, pasandole dia, mes y año
    protected static boolean comprobarFecha(int dia, int mes, int año)
     {
         switch(mes)
@@ -400,6 +408,7 @@ public class panelAltaCliente extends javax.swing.JPanel {
         return false;
     }
     
+   //Funcion que comprueba si el año es bisiesto
     protected static boolean comprobarBisiesto(int año)
     {
         if(año % 4 == 0 && (año %100 !=0 || año %400 == 0))
@@ -439,6 +448,8 @@ public class panelAltaCliente extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
+    
+    //Funciones que establece el dia, mes y año del sistema
     private int establecerDiaSistema(Calendar fecha)
     {
   

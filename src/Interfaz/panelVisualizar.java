@@ -70,8 +70,8 @@ public class panelVisualizar extends javax.swing.JPanel {
         
         if (objeto instanceof Cliente)
         {
-             jLabel2.setText("NOMBRE CLIENTE");
-            //Se le cambia el nombre a las etiquetas
+                        //Se le cambia el nombre a las etiquetas
+            jLabel2.setText("NOMBRE CLIENTE");
             jLabel7.setText("SALDO");
             jLabel8.setText("DIRECCION");
             

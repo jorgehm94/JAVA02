@@ -276,6 +276,7 @@ public class panelAltaSocio extends javax.swing.JPanel {
             //Hace falta inicializarlos a 0
             int dia = 0, mes = 0, año = 0;
             
+            //Si el usuario indica que la fecha sea la del sistema
             if (fechaSistema==true) {
                 Calendar fecha = new GregorianCalendar();
                 dia = establecerDiaSistema(fecha);
@@ -287,21 +288,22 @@ public class panelAltaSocio extends javax.swing.JPanel {
                 mes = Integer.parseInt(mesCaptura);
                 año = Integer.parseInt(añoCaptura);
             }
-            //Creamos el objeto
+            
             //public Socio(int añoDesde, float comision, int codigo, float deuda, String nombre, int dia, int mes, int año) {
              
-             
+             //Llamamos a la funcion "ComprobarFecha" para validar datos de entrada, que se encuentra en "panelAltaCliente"
              if(panelAltaCliente.comprobarFecha(dia, mes, año)){
-                 Socio objetoSocio = new Socio(aD, com, cod, deu, nombreCaptura, dia, (mes - 1), año);
+                 Socio objetoSocio = new Socio(aD, com, cod, deu, nombreCaptura, dia, (mes - 1), año);//Creamos el objeto
               
                 //Devuelve falso en el caso de que no se pueda meter el objeto Socio
                 Boolean bandera = listemp.anadirAlFinal(objetoSocio);
                 //Llamamos a la funcion de vaciar campos
                 vaciarCampos();
                 
+                //Mensaje por pantalla que muestra que el proceso de introduccion de datos ha ido bien
                  JOptionPane.showMessageDialog(null, "Listo", "Todo bien y todo correcto", JOptionPane.INFORMATION_MESSAGE);
             }
-            else
+             else //Si la fecha es incorrecta, mandamos un error y vaciamos los campos de la fecha
             {
                 JOptionPane.showMessageDialog(null, "Error en la fecha", "Fecha error", JOptionPane.WARNING_MESSAGE);
                 // Vaciar campo de la fecha 
@@ -315,10 +317,10 @@ public class panelAltaSocio extends javax.swing.JPanel {
              JOptionPane.showMessageDialog(null, "Algun error en la introduccion de datos", "Error", JOptionPane.INFORMATION_MESSAGE);
         }
         
-         // desactivar el boton de fecha del sistema
+         // desactivamos el boton de fecha del sistema
             jCheckBox1.setSelected(false);
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    // Si el usuario clickea en el cuadro de fecha del sistema, la añadimos y dejamos el boton sin poder editarlo.
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
          Calendar fecha = new GregorianCalendar();
         if(jCheckBox1.isSelected()==true)
@@ -349,6 +351,7 @@ public class panelAltaSocio extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
+        //Funciones que establecen el dia, mes y año del sistema
      private int establecerDiaSistema(Calendar fecha)
     {
   
