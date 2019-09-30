@@ -300,9 +300,6 @@ public class panelAltaCliente extends javax.swing.JPanel {
         jTextField7.setEnabled(true);
         jTextField8.setEnabled(true);
         
-        jTextField4.setText("");
-        jTextField7.setText("");
-        jTextField8.setText("");
         
         try {
             //Capturamos los texfields
@@ -342,14 +339,14 @@ public class panelAltaCliente extends javax.swing.JPanel {
             if(comprobarFecha(dia, mes, año)){
                 Cliente objetoCliente = new Cliente(sal, direccionCaptura, cod, deu, nombreCaptura, dia, mes, año); //Creamos el objeto
                 //Se añade a la lista
-            //Devuelve falso en el caso de que no se pueda meter el objeto Cliente
-            Boolean bandera = listemp.anadirAlFinal(objetoCliente);
+                //Devuelve falso en el caso de que no se pueda meter el objeto Cliente
+                Boolean bandera = listemp.anadirAlFinal(objetoCliente);
 
-            //Llamamos a la funcion de vaciar campos
-            vaciarCampos();
+                //Llamamos a la funcion de vaciar campos
+                vaciarCampos();
 
-            //Mensaje por pantalla que muestra que el proceso de introduccion de datos ha ido bien
-            JOptionPane.showMessageDialog(null, "Listo", "Todo bien y todo correcto", JOptionPane.INFORMATION_MESSAGE);
+                //Mensaje por pantalla que muestra que el proceso de introduccion de datos ha ido bien
+                JOptionPane.showMessageDialog(null, "Listo", "Todo bien y todo correcto", JOptionPane.INFORMATION_MESSAGE);
             
             }
             else //Si la fecha es incorrecta, mandamos un error y vaciamos los campos de la fecha
