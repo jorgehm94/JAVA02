@@ -26,7 +26,6 @@ public class panelFiltrar extends javax.swing.JPanel {
 
     // Nueva lista con los filtros seleccionados
     protected Lista<Persona> listFiltrada;
-    private boolean unaLista=false;
     private int cont=0;
     
     public panelFiltrar() {
@@ -716,9 +715,10 @@ public class panelFiltrar extends javax.swing.JPanel {
             
             if(creado)
             {
-                            // Hago que se vean los botones anterior y siguiente
-                  
-
+                   // Hago que se vean los botones anterior y siguiente
+                      jButton1.setVisible(true);
+                      jButton2.setVisible(true);
+                      
                    // Desactivo el boton hacia atras
                    jButton1.setEnabled(false);
 
@@ -778,12 +778,12 @@ public class panelFiltrar extends javax.swing.JPanel {
          if(cont==listFiltrada.tamanio()-1)
               jButton2.setEnabled(false);
          
-         
        
          Persona obj = listFiltrada.obtener(cont);
             
          actualizarDatos(obj);
-
+         
+         
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -871,7 +871,7 @@ public class panelFiltrar extends javax.swing.JPanel {
             String cadenaAño = jTextField3.getText();
             int año = Integer.parseInt(cadenaAño);
             
-            boolean creado = crearListaFiltradaPorDato(año);
+            boolean creado = crearListaFiltradaPorAñoDesde(año);
             
            
             if(creado)
@@ -929,7 +929,7 @@ public class panelFiltrar extends javax.swing.JPanel {
             String saldo = jTextField4.getText();
             int s = Integer.parseInt(saldo);
             
-            boolean creado = crearListaFiltradaPorDato(s);
+            boolean creado = crearListaFiltradaPorSaldo(s);
 
             if(creado)
             {
@@ -1078,7 +1078,7 @@ public class panelFiltrar extends javax.swing.JPanel {
         
     }
      
-    private boolean crearListaFiltradaPorDato(int dato)
+    private boolean crearListaFiltradaPorAñoDesde(int dato)
     {
         Persona obj;
         boolean alMenosUno=false;
@@ -1088,7 +1088,7 @@ public class panelFiltrar extends javax.swing.JPanel {
         {
             obj = listemp.obtener(c);
 
-            if(obj.getDato()==dato){
+            if(obj.getDato()==dato && obj instanceof Socio){
                 listFiltrada.anadirAlFinal(obj);
                 alMenosUno=true;
             }
@@ -1099,7 +1099,28 @@ public class panelFiltrar extends javax.swing.JPanel {
         return alMenosUno;
         
     }
+    
+    private boolean crearListaFiltradaPorSaldo(int dato)
+    {
+        Persona obj;
+        boolean alMenosUno=false;
+        int c = 0;
+        
+        while(c<listemp.tamanio())
+        {
+            obj = listemp.obtener(c);
 
+            if(obj.getDato()==dato && obj instanceof Cliente){
+                listFiltrada.anadirAlFinal(obj);
+                alMenosUno=true;
+            }
+            
+            c++;
+        }
+        
+        return alMenosUno;
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
